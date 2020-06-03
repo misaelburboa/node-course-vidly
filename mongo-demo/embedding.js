@@ -34,7 +34,7 @@ async function listCourses() {
 
 async function updateAuthor(courseId) {
   // const course = await Course.findById(courseId);
-  const course = await Course.update({_id: courseId}, {
+  const course = await Course.updateOne({_id: courseId}, {
     $unset: {
       'author.name': ''
     }
@@ -58,7 +58,7 @@ async function addAuthor(courseId, author) {
 async function removeAuthor(courseId, authorId) {
   const course = await Course.findById(courseId);
   const author = course.authors.id(authorId);
-  author.remove();
+  author.deleteOne();
   course.save();
 }
 

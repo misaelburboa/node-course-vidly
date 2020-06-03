@@ -66,7 +66,7 @@ async function getCoursesWithRegExp() {
 
         .limit(10)
         .sort({ name: 1 })
-        .count();
+        .countDocuments();
         // .select({ name: 1, tags: 1, author: 1});
     console.log(courses);
 }
@@ -82,7 +82,7 @@ async function getCoursesPagination() {
         .skip((pageNumber - 1) * pageSize)
         .limit(pageSize)
         .sort({ name: 1 })
-        .count();
+        .countDocuments();
         // .select({ name: 1, tags: 1, author: 1});
     console.log(courses);
 }
@@ -104,7 +104,7 @@ async function updateCourseQueryFirst(id) {
 // updateCourseQueryFirst('5e2058cc9e4d08add6d8c5e9');
 
 async function updateCourseUpdateFirst(id) {
-    // const result = await Course.update({ _id: id }, {
+    // const result = await Course.updateOne({ _id: id }, {
     //     $set: {
     //         author: 'Misael',
     //         isPublished: false

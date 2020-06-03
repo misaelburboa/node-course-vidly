@@ -5,8 +5,8 @@ const { Genre } = require('../../model/Genre');
 describe( 'auth middleware', () => {
     beforeEach(() => { server = require('../../index'); });
     afterEach(async () => {
-        await Genre.remove({});
-        server.close();
+        await Genre.deleteMany();
+        await server.close();
     });
 
     let token;

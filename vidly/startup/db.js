@@ -4,6 +4,13 @@ const config = require('config');
 
 module.exports = function() {
     const db = config.get('db');
-    mongoose.connect(config.get('db'), { useNewUrlParser: true, useUnifiedTopology: true })
+    const options = {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true,
+    };
+
+    mongoose.connect(config.get('db'), options)
     .then(() => winston.info(`Connected to ${db}`));
 };

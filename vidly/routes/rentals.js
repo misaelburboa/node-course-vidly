@@ -46,7 +46,7 @@ router.post('/', auth, async (req, res) => {
     try {
         new Fawn.Task()
             .save('rentals', rental)
-            .update('movies', {_id: movie._id}, {
+            .updateOne('movies', {_id: movie._id}, {
                 $inc: { numberInStock: -1 }
             })
             .run();
