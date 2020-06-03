@@ -1,4 +1,5 @@
 const { Rental } = require('../../model/Rental');
+const { User } = require('../../model/User');
 const mongoose = require('mongoose');
 const request = require('supertest');
 
@@ -47,5 +48,23 @@ describe('/api/returns', () => {
             .send({ customerId, movieId});
         
         expect(res.status).toBe(401);
+    });
+
+    it('should return 400 if customerId is not provided', async () => {
+        const token = new User().generateAuthToken();
+        const res = await request(server)
+            .post('/api/returns')
+            .send({ movieId });
+        
+        expect(res.status).toBe(400);
+    });
+
+    it('should return 400 if movieId is not provided', async () => {
+        const token = new User().generateAuthToken();
+        const res = await request(server)
+            .post('/api/returns')
+            .send({ customerId });
+        
+        expect(res.status).toBe(400);
     });
 });
