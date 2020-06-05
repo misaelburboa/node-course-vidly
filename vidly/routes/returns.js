@@ -21,7 +21,7 @@ router.post('/', [auth, validate(validateReturn)], async (req, res) => {
     rental.return();
     await rental.save();
 
-    await Movie.update({ _id: rental.movie._id }, {
+    await Movie.updateOne({ _id: rental.movie._id }, {
         $inc: { numberInStock: 1 }
     });
     
